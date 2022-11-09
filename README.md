@@ -1,11 +1,11 @@
 # introToProgrammingFinalProjectP1
-# Project Title
+# Path Attack...
 
-Simple overview of use/purpose.
+Using Djikstra's algorithm to get enemies to pass around walls.  
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+A top down 2d game where enemies chase the player around walls.  
 
 ## Getting Started
 
