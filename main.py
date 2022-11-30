@@ -31,7 +31,6 @@ def draw_grid():
         pg.draw.line(screen, LIGHTGRAY, (x, 0), (x, HEIGHT))
     for y in range(0, HEIGHT, TILESIZE):
         pg.draw.line(screen, LIGHTGRAY, (0, y), (WIDTH, y))
-        print(y)
 
 # ;lkasjdf;lkasjdf
 
@@ -46,15 +45,32 @@ class SquareGrid:
         self.width = width
         self.height = height
         self.walls = []
-        self.connections = [vec(1,0), vec(0,1), vec(0,1), vec(0, -1)]
+        # self.connections determines the directions a node can "look".  To the right, left, down, up in this case. 
+        self.connections = [vec(1,0), vec(-1,0), vec(0,1), vec(0,-1)]
 
     def in_bounds(self, node):
-
+        return 0 <= node.x < self.width and 0 <= node.y < self.height
+    
+    def passable(self, node):
+        return node not in self.walls
+    
     def find_neighbors(self, node):
         # dynamic iteration
         #  adds 'node' to 'connection' through each iteration
         neighbors = [node + connection for connection in self.connections]
-        filter(function or None, neighbors)
+
+        # Filter an array and and return a new array with only values from the function/method in the first argument
+        # The function passed as an argument must return true or false
+        neighbors = filter(self.in_bounds, neighbors)
+        neighbors = filter(self.passable, neighbors)
+        print(list(neighbors))
+        return neighbors
+
+g = SquareGrid(5,4)
+g.walls = [vec(2,1), vec(2,2)]
+g.find_neighbors(vec(0,0))
+g.find_neighbors(vec(3,2))
+
 
 running = True
 while running:
